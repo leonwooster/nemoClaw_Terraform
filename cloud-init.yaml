@@ -1,0 +1,50 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+timezone: ${timezone}
+packages:
+  - curl
+  - git
+  - ca-certificates
+  - build-essential
+  - jq
+  - unzip
+  - net-tools
+  - tmux
+  - htop
+
+write_files:
+  - path: /usr/local/bin/bootstrap-nemoclaw.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      mkdir -p /opt/nemoclaw
+      cd /opt/nemoclaw
+
+      cat > /opt/nemoclaw/README.txt <<'README'
+      This VM was provisioned by Terraform.
+      Base packages are installed.
+
+      If you want to install NemoClaw manually:
+        curl -fsSL https://www.nvidia.com/nemoclaw.sh | bash
+
+      After installation, verify:
+        nemoclaw --help
+
+      The Terraform variable install_nemoclaw is currently set to: ${install_nemoclaw}
+      README
+
+      if [ "${install_nemoclaw}" = "true" ]; then
+        curl -fsSL https://www.nvidia.com/nemoclaw.sh | bash || true
+      fi
+
+      ufw allow 22/tcp || true
+      ufw allow ${app_port}/tcp || true
+
+runcmd:
+  - [ bash, -lc, "/usr/local/bin/bootstrap-nemoclaw.sh > /var/log/bootstrap-nemoclaw.log 2>&1" ]
+
+final_message: "cloud-init finished. Review /var/log/bootstrap-nemoclaw.log after SSH login."

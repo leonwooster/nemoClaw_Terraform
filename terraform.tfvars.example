@@ -1,0 +1,36 @@
+# Copy this file to terraform.tfvars and adjust values.
+subscription_id          = ""
+resource_group_name      = "nemoclaw-rg"
+location                 = "southeastasia"
+name_prefix              = "nemoclaw"
+vm_name                  = "nemoclaw-vm"
+computer_name            = "nemoclawvm"
+admin_username           = "azureuser"
+vm_size                  = "Standard_B2s"
+os_disk_size_gb          = 30
+os_disk_storage_account_type = "StandardSSD_LRS"
+
+# Security hardening recommendation:
+# Replace 0.0.0.0/0 with your public IP in CIDR format, for example 203.0.113.10/32
+ssh_source_cidr          = "0.0.0.0/0"
+open_app_port            = true
+app_port                 = 3000
+app_source_cidr          = "0.0.0.0/0"
+
+timezone                 = "Asia/Kuala_Lumpur"
+install_nemoclaw         = false
+
+# Azure auto-shutdown schedule uses UTC here.
+# 1600 UTC = 12:00 AM Malaysia time (UTC+8)
+auto_shutdown_time_utc   = "1600"
+auto_shutdown_timezone   = "UTC"
+
+write_private_key_to_disk = true
+private_key_output_path   = "./id_rsa_nemoclaw"
+
+tags = {
+  project     = "nemoclaw"
+  environment = "dev"
+  owner       = "leon"
+  costcenter  = "experimentation"
+}
