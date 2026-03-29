@@ -182,7 +182,7 @@ az vm create ^
   --storage-sku %OS_DISK_TYPE% ^
   --admin-username %ADMIN_USER% ^
   --generate-ssh-keys ^
-  --custom-data cloud-init.yaml ^
+  --custom-data cloud-init-cli.yaml ^
   --patch-mode ImageDefault ^
   --tags %TAGS%
 ```
