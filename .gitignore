@@ -1,0 +1,19 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfplan
+tfplan
+.terraform.lock.hcl
+
+# SSH keys
+id_rsa_*
+*.pem
+
+# Variables with secrets
+terraform.tfvars
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

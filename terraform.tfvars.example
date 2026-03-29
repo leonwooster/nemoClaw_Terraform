@@ -6,7 +6,7 @@ name_prefix              = "nemoclaw"
 vm_name                  = "nemoclaw-vm"
 computer_name            = "nemoclawvm"
 admin_username           = "azureuser"
-vm_size                  = "Standard_B2s"
+vm_size                  = "Standard_B1ms"
 os_disk_size_gb          = 30
 os_disk_storage_account_type = "StandardSSD_LRS"
 

@@ -43,7 +43,7 @@ variable "admin_username" {
 variable "vm_size" {
   description = "Cost-optimized burstable VM size. Standard_B2s is a good starting point for RM100-RM200/month range."
   type        = string
-  default     = "Standard_B2s"
+  default     = "Standard_B1ms"
 }
 
 variable "os_disk_size_gb" {
